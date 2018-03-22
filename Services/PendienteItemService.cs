@@ -25,7 +25,7 @@ namespace ListaWeb.Services
         public bool AgregarPendiente(PendienteItem pendiente)
         {
             
-
+          _context.Pendientes.Add(pendiente);
 
 
             /// no quitar estas dos lineas
@@ -38,7 +38,16 @@ namespace ListaWeb.Services
         public IEnumerable<PendienteItem> GetPendientesIncompletos()
         {
 
-            return new List<PendienteItem>();
+            var PorHacer=new List<PendienteItem>();
+            var Por = from H in _context.Pendientes
+            where H.EstaHecha==false
+            select H ;
+            
+            foreach (var x in Por)
+            {
+                PorHacer.Add(x);
+            }
+            return PorHacer;
 
 
         }
@@ -51,8 +60,13 @@ namespace ListaWeb.Services
            /// Buscar el id de la tarea
            /// utilizar el método de LINQ FirstOrDefault
            /// Regresa el pendiente si lo encontró null si no
-           
+          foreach( var x in _context.Pendientes)
+          if(x.Id==id)
+          {
+              x.EstaHecha=true;
 
+          }
+           
             /// 2
             /// Verificar que el pendiente no sea null en ese caso regresar false
 

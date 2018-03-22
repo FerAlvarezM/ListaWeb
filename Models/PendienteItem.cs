@@ -22,16 +22,22 @@ namespace ListaWeb.Models
         /// Aquí deben hacer todo lo necesario para la creación de un Pendiente
         public PendienteItem()
         {
-            /// El Id debe generarse a la creación de Guid
-
-
+           /// El Id debe generarse a la creación de Guid
+        
+            DateTime PorHacer= DateTime.Today;
+ 
             /// Las tareas son para dentro de dos días 
 
+            ParaCuando = PorHacer.AddDays(3);
 
             
             /// Siempre las tareas deben estas no EstaHecha = false
-           
 
+           
+           //identificador global 
+           Guid guid = Guid.NewGuid();
+           string id = guid.ToString();
+           EstaHecha = false ;
         }
     }
 }
